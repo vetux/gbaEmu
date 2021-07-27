@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "gba/cartridge.hpp"
+#include "gba/arm7tdmi.hpp"
 
 static void printHeader(const Cartridge::Header &header) {
     std::cout << "GameTitle:" << header.gameTitle() << "\n"
