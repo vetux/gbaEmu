@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+#include "gba/bus.hpp"
+
 class Arm7TDMI {
 public:
     struct Registers {
@@ -28,10 +30,23 @@ public:
 
     Arm7TDMI();
 
-    explicit Arm7TDMI(Registers registers);
+    explicit Arm7TDMI(Bus bus);
+
+    Arm7TDMI(Bus bus, Registers registers);
+
+    const Registers &getRegisters();
+
+    void reset(uint32_t entryPoint);
+
+    void step();
 
 private:
+    Bus bus{};
     Registers registers{};
+
+    void parseArm(const std::vector<uint8_t> &instruction);
+
+    void parseThumb(const std::vector<uint8_t> &instruction);
 };
 
 #endif //GBAEMU_ARM7TDI_HPP

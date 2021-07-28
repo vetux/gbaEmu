@@ -7,7 +7,7 @@ Cartridge Cartridge::loadFromFile(const std::string &filepath) {
     if (file.fail()) {
         throw std::runtime_error("Failed to open cartridge at " + filepath);
     }
-    return Cartridge(Memory(std::vector<char>(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>())));
+    return Cartridge(Memory(std::vector<uint8_t>(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>())));
 }
 
 Cartridge::Cartridge() = default;

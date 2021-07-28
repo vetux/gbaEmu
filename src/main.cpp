@@ -10,8 +10,6 @@ static void printHeader(const Cartridge::Header &header) {
 }
 
 int main(int argc, char *argv[]) {
-    static_assert(sizeof(char) == 1, "Unsupported platform (char is not 1 byte");
-
     if (argc < 2) {
         std::cout << "Please specify the path to a rom\n";
         return 0;
@@ -22,6 +20,13 @@ int main(int argc, char *argv[]) {
     Cartridge cart = Cartridge::loadFromFile(romFilePath);
 
     printHeader(cart.getHeader());
+
+    Bus bus(cart.getRom());
+    Arm7TDMI cpu(bus);
+
+    cpu.reset(0x8000000);
+
+    cpu.step();
 
     return 0;
 }
