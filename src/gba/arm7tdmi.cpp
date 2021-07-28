@@ -4,14 +4,12 @@
 
 #include <cassert>
 
-Arm7TDMI::Arm7TDMI() = default;
-
-Arm7TDMI::Arm7TDMI(Bus bus)
-        : bus(std::move(bus)),
+Arm7TDMI::Arm7TDMI(Bus &bus)
+        : bus(bus),
           registers() {}
 
-Arm7TDMI::Arm7TDMI(Bus bus, Arm7TDMI::Registers registers)
-        : bus(std::move(bus)),
+Arm7TDMI::Arm7TDMI(Bus &bus, Arm7TDMI::Registers registers)
+        : bus(bus),
           registers(registers) {}
 
 void Arm7TDMI::reset(uint32_t entryPoint) {

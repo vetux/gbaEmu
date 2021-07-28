@@ -28,11 +28,9 @@ public:
         uint32_t SPSR;
     };
 
-    Arm7TDMI();
+    explicit Arm7TDMI(Bus &bus);
 
-    explicit Arm7TDMI(Bus bus);
-
-    Arm7TDMI(Bus bus, Registers registers);
+    Arm7TDMI(Bus &bus, Registers registers);
 
     const Registers &getRegisters();
 
@@ -41,7 +39,7 @@ public:
     void step();
 
 private:
-    Bus bus{};
+    Bus &bus;
     Registers registers{};
 
     void parseArm(const std::vector<uint8_t> &instruction);
